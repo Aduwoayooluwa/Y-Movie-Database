@@ -4,11 +4,13 @@ import axios from 'axios'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { TailSpin } from 'react-loader-spinner'
+
 // Import Swiper styles
 import 'swiper/css';
-import { useRouter } from 'next/router';
 
-type Props = {}
+type Props = {
+    id: any
+}
 
 const getter = (url: string) => axios.get(url, {
     headers: {
@@ -16,29 +18,26 @@ const getter = (url: string) => axios.get(url, {
         'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
     }
 }
-    
-    ).then((response) => response.data)
+).then((response) => response.data)    
 
-const url = 'https://moviesdatabase.p.rapidapi.com/titles/x/upcoming'
 
-const Upcoming = (props: Props) => {
+
+const Casts = (props: Props) => {
+    const url = `https://moviesdatabase.p.rapidapi.com/titles/${props.id}/main_actors`
+
     const { data, error, isLoading } = useSWR(url, getter)
     console.log(data)
 
-    const router = useRouter()
-
     if (error) {
-        return (
-            <>
-            <p>Error Loading ...</p>
-            </>
-        )
+        <Fragment>
+            Error Loading Page
+        </Fragment>
     }
 
     if (isLoading) {
         return (
             <div className='w-full h-full'>
-                <p className='font-semibold text-xl my-3'>Upcoming Movies</p>
+                <p className='font-semibold text-xl my-3'>Ancient Movies recommendations</p>
                 <div className='grid place-items-center'>
                     <TailSpin
                         height="30"
@@ -55,14 +54,15 @@ const Upcoming = (props: Props) => {
         )
     }
 
+    if (data?.results?.length === 0) {
+        return (<main className='mt-10 text-center shadow-md border border-yellow-600 w-full h-full p-4'>
+            <p>No data for this movies&apos; Actors</p>
+        </main>)
+    }
+    
     return (
         <Fragment>
-            <main className='px-2'>
-                <div>
-                    <p className='font-semibold text-xl my-3'>Upcoming Movies</p>
-                </div>
-
-                <Swiper
+            <Swiper
                 spaceBetween={20}
                 slidesPerView={2}
                 >
@@ -70,9 +70,7 @@ const Upcoming = (props: Props) => {
                     data !== undefined &&
                     (data.results.map((result: any, index: number) => {
                         return (
-                            <SwiperSlide key={index} onClick={() => {
-                                    router.push(`/movies/${result.id}`)
-                            }}>
+                            <SwiperSlide key={index} className='shadow-md border border-yellow-600 w-full h-full p-4'>
                                 <div>
                                     <div>
                                         {
@@ -83,7 +81,7 @@ const Upcoming = (props: Props) => {
                                             </div>)
                                         }
                                     </div>
-                                    <p className='font-semibold text-center'>{result.titleText.text}</p>
+                                    <p className='font-semibold text-center'>{result?.titleText?.text}</p>
                                 </div>
                                 
                             </SwiperSlide>
@@ -92,9 +90,8 @@ const Upcoming = (props: Props) => {
                 }
                 ...
                 </Swiper>
-            </main>
         </Fragment>
     )
 }
 
-export default Upcoming
+export default Casts
