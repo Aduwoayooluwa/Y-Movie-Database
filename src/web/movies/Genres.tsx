@@ -14,13 +14,12 @@ const getter = (url: string) => axios.get(url, {
         'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
     }
 }
-    
-    ).then((response) => response.data)
+).then((response) => response.data)
 
-const Actors = (props: Props) => {
+const Genres = (props: Props) => {
     const router = useRouter()
 
-    const url = `https://moviesdatabase.p.rapidapi.com/actors`
+    const url = `https://moviesdatabase.p.rapidapi.com/titles/utils/genres`
     const { data, error, isLoading } = useSWR(url, getter)
     console.log(data)
 
@@ -52,44 +51,27 @@ const Actors = (props: Props) => {
         )
     }
 
-
     return (
         <Fragment>
-            <main className='mx-3 w-full'>
+            <main className='w-full'>
                 <div>
-                    <p className='font-semibold text-xl my-3'>Top Actors</p>
+                    <p className='font-semibold text-xl my-3'>Top Genres</p>
                 </div>
 
-                <Swiper
-                spaceBetween={20}
-                slidesPerView={2}
-                
-                >
+                <section className='grid grid-cols-2 gap-3 place-items-center  mx-3'>
                     {
-                    data !== undefined &&
-                    (data.results.map((result: any, index: number) => {
-                        return (
-                            <SwiperSlide className='w-full' key={index} onClick={() => {
-                                    router.push(`/actors/${result.id}`)
-                            }}>
-                                <div>
-                                    <div>
-                                        {
-                                            <p className='w-full text-center border shadow border-yellow-600 p-3 font-semibold' key={index}>{result?.primaryName}</p>
-                                        }
-                                    </div>
+                        data?.results.map((result: any, index: number) => {
+                            return (
+                                <div key={index} className='border w-[150px] p-2 grid place-items-center border-yellow-600'>
+                                    <p>{result}</p>
                                 </div>
-                                
-                            </SwiperSlide>
-                        )
-                    }))
-                }
-                ...
-                </Swiper>
+                            )
+                        })
+                    }
+                </section>
             </main>
-
         </Fragment>
     )
 }
 
-export default Actors
+export default Genres
