@@ -5,6 +5,7 @@ import styles from '@/styles/Home.module.css'
 import Index from '@/web/movies'
 import Upcoming from '@/web/movies/Upcoming'
 import Series from '@/web/movies/Series'
+import Actors from '@/web/movies/Actors'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,6 +23,7 @@ export default function Home() {
         <Index />
         <Upcoming />
         <Series />
+        <Actors />
 
       </main>
     </>
