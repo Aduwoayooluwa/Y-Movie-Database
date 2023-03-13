@@ -40,7 +40,7 @@ const MovieBase = () => {
                 {
                     data !== undefined && (
                         <>
-                            <Image className='rounded-md' width={data.results.primaryImage.height} height={data.results.primaryImage.height} src={data.results.primaryImage.url} alt={'image'}/>
+                            <Image className='rounded-md' width={data.results?.primaryImage?.height} height={data.results?.primaryImage?.height} src={data.results?.primaryImage?.url} alt={'image'}/>
                             <div className='py-4 px-3'>
                                 <p className='font-semibold text-xl'>{data.results.titleText.text}</p>
                                 <div>
