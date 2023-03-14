@@ -4,23 +4,13 @@ import axios from 'axios'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { TailSpin } from 'react-loader-spinner'
-
+import { getter } from '@/utils/fetcher';
 // Import Swiper styles
 import 'swiper/css';
 
 type Props = {
     id: any
 }
-
-const getter = (url: string) => axios.get(url, {
-    headers: {
-        'X-RapidAPI-Key': '9e89d4ea21msh48f2cd0ac7d903ep132579jsna3c3bc99b2a5',
-        'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
-    }
-}
-).then((response) => response.data)    
-
-
 
 const Casts = (props: Props) => {
     const url = `https://moviesdatabase.p.rapidapi.com/titles/${props.id}/main_actors`

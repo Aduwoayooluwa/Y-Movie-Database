@@ -53,14 +53,14 @@ const Genres = (props: Props) => {
 
     return (
         <Fragment>
-            <main className='w-full'>
+            <main className='w-full mb-6'>
                 <div>
-                    <p className='font-semibold text-xl my-3'>Top Genres</p>
+                    <p className='font-semibold text-xl m-3'>Top Genres</p>
                 </div>
 
-                <section className='grid grid-cols-2 gap-3 place-items-center  mx-3'>
+                <section className='grid grid-cols-2 gap-3 place-items-center  '>
                     {
-                        data?.results.map((result: any, index: number) => {
+                        Object.entries(data?.results).slice(1, 9).map((result: any, index: number) => {
                             return (
                                 <div key={index} className='border w-[150px] p-2 grid place-items-center border-yellow-600'>
                                     <p>{result}</p>
