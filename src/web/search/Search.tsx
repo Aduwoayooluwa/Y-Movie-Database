@@ -68,7 +68,7 @@ const Search = (props: Props) => {
                       return (
                         <div key={index}>
                             <li>
-                                <Link href={""} as="">
+                                <Link href={"/search"} as="">
                                 <Image className='rounded-md w-[300px] h-[300px]' width={150} height={200} src={title.primaryImage.url} alt={'image'}/>
                                     <p>{title.titleText.text}</p>
                                 </Link>
