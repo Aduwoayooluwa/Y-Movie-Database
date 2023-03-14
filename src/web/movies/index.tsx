@@ -7,19 +7,17 @@ import { TailSpin } from  'react-loader-spinner'
 // Import Swiper styles
 import 'swiper/css';
 import { useRouter } from 'next/router';
+import { getter } from '@/utils/fetcher';
 
-const getter = (url) => axios.get(url, {
-    headers: {
-        'X-RapidAPI-Key': '9e89d4ea21msh48f2cd0ac7d903ep132579jsna3c3bc99b2a5',
-        'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
-    }
+
+const url = ''
+type Props = {
+    page: number,
+    title: string
 }
-).then((response) => response.data)    
 
-
-const url = 'https://moviesdatabase.p.rapidapi.com/titles?page=4'
-
-const Index = () => {
+const Index = (props: Props) => {
+    const url = `https://moviesdatabase.p.rapidapi.com/titles?page=${props.page}`
     const { data, error, isLoading } = useSWR(url, getter)
     console.log(data)
 
@@ -33,7 +31,7 @@ const Index = () => {
     if (isLoading) {
         return (
             <div className='w-full h-full'>
-                <p className='font-semibold text-xl my-3'>Ancient Movies recommendations</p>
+                <p className='font-semibold text-xl my-3'>{props.title}</p>
                 <div className='grid place-items-center'>
                     <TailSpin
                         height="30"
@@ -54,7 +52,7 @@ const Index = () => {
         <Fragment>
             <main className='px-2'>
                 <div>
-                    <p className='font-semibold text-xl my-3'>Ancient Movies recommendations</p>
+                    <p className='font-semibold text-xl my-3'>{props.title}</p>
                 </div>
 
                 <Swiper
@@ -63,7 +61,7 @@ const Index = () => {
                 >
                     {
                     data !== undefined &&
-                    (data.results.map((result, index) => {
+                    (data.results.map((result: any, index: number) => {
                         return (
                             <SwiperSlide key={index} onClick={() => {
                                 router.push(`/movies/${result.id}`)
@@ -72,8 +70,8 @@ const Index = () => {
                                     <div>
                                         {
                                             result.primaryImage !== null ? (<>
-                                                <Image className='rounded-md' width={result.primaryImage.height} height={result.primaryImage.height} src={result.primaryImage.url} alt={'image'}/>
-                                            </>) : (<div className='bg-slate-300 h-[120px] w-full grid place-items-center'>
+                                                <Image className='rounded-md w-[300px] h-[300px]' width={150} height={200} src={result.primaryImage.url} alt={'image'}/>
+                                            </>) : (<div className='bg-slate-300 h-[300px] w-full grid place-items-center'>
                                                 <p className='font-medium'>Default</p>
                                             </div>)
                                         }

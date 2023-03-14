@@ -70,8 +70,8 @@ const Upcoming = (props: Props) => {
                                     <div>
                                         {
                                             result.primaryImage !== null ? (<>
-                                                <Image className='rounded-md' width={result.primaryImage.height} height={result.primaryImage.height} src={result.primaryImage.url} alt={'image'}/>
-                                            </>) : (<div className='bg-slate-300 h-[120px] w-full grid place-items-center'>
+                                                <Image className='rounded-md w-[300px] h-[300px]' width={150} height={200} src={result.primaryImage.url} alt={'image'}/>
+                                            </>) : (<div className='bg-slate-300 h-[300px] w-full grid place-items-center'>
                                                 <p className='font-medium'>Default</p>
                                             </div>)
                                         }
