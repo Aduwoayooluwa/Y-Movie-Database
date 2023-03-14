@@ -57,6 +57,7 @@ const Search = (props: Props) => {
           onFocus={onFocus}
           placeholder='Search....'
           value={query}
+          className='p-3 outline-none rounded-full w-full'
           />
 
           <section className=''>
