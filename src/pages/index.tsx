@@ -2,11 +2,13 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import Index from '@/web/movies'
 import Upcoming from '@/web/movies/Upcoming'
 import Series from '@/web/movies/Series'
-import Actors from '@/web/movies/Actors'
+import Actors from '@/web/actors/Actors'
 import Genres from '@/web/movies/Genres'
+import Index from '@/web/movies'
+import Popular from '@/web/movies/Popular'
+import Carousel from '@/Layout/Carousel'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,11 +23,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Index />
+        <Carousel />
+        <Popular />
+        <Index page={1} title='Ancient Movies'/>
         <Upcoming />
         <Series />
+        <Index page={3} title='More Ancient Movies'/>
         <Actors />
         <Genres />
+        <Index page={1000} title='1920s Movies'/>
       </main>
     </>
   )

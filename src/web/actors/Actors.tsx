@@ -46,11 +46,12 @@ const Actors = (props: Props) => {
 
     return (
         <Fragment>
-            <main className='mx-3 w-full'>
+            <main className='px-3 bg-slate-100 py-10 w-full'>
                 <div>
                     <p className='font-semibold text-xl my-3'>Top Actors</p>
                 </div>
 
+                <div className='flex lg:hidden'>
                 <Swiper
                 spaceBetween={20}
                 slidesPerView={2}
@@ -77,6 +78,37 @@ const Actors = (props: Props) => {
                 }
                 ...
                 </Swiper>
+                </div>
+
+                {/* desktip */}
+                <div className='hidden lg:flex w-full'>
+                <Swiper
+                spaceBetween={20}
+                slidesPerView={4}
+                
+                >
+                    {
+                    data !== undefined &&
+                    (data.results.map((result: any, index: number) => {
+                        return (
+                            <SwiperSlide className='w-full' key={index} onClick={() => {
+                                    router.push(`/actors/${result.id}`)
+                            }}>
+                                <div>
+                                    <div>
+                                        {
+                                            <p className='w-full text-center border shadow border-yellow-600 p-2 font-semibold' key={index}>{result?.primaryName}</p>
+                                        }
+                                    </div>
+                                </div>
+                                
+                            </SwiperSlide>
+                        )
+                    }))
+                }
+                ...
+                </Swiper>
+                </div>
             </main>
 
         </Fragment>

@@ -6,6 +6,7 @@ import { TailSpin } from  'react-loader-spinner'
 import axios from 'axios'
 import Link from 'next/link';
 import Image from 'next/image';
+import SearchBox from '@/components/SearchBox';
 
 type Props = {}
 
@@ -52,13 +53,7 @@ const Search = (props: Props) => {
   return (
     <Fragment>
       <div ref={searchRef}>
-        <input type="search"
-          onChange={onChange}
-          onFocus={onFocus}
-          placeholder='Search....'
-          value={query}
-          className='p-3 outline-none rounded-full w-full'
-          />
+        <SearchBox handleChange={onChange} handleFocus={onFocus} query={query}/>
 
           <section className=''>
           {
@@ -70,7 +65,6 @@ const Search = (props: Props) => {
                         <div key={index}>
                             <li>
                                 <Link href={"/search"} as="">
-                                <Image className='rounded-md w-[300px] h-[300px]' width={150} height={200} src={title.primaryImage.url} alt={'image'}/>
                                     <p>{title.titleText.text}</p>
                                 </Link>
                             </li>

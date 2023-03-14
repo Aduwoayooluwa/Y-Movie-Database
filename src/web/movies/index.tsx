@@ -55,6 +55,7 @@ const Index = (props: Props) => {
                     <p className='font-semibold text-xl my-3'>{props.title}</p>
                 </div>
 
+                <div className='flex lg:hidden'>
                 <Swiper
                 spaceBetween={20}
                 slidesPerView={2}
@@ -64,13 +65,13 @@ const Index = (props: Props) => {
                     (data.results.map((result: any, index: number) => {
                         return (
                             <SwiperSlide key={index} onClick={() => {
-                                router.push(`/movies/${result.id}`)
-                        }}>
+                                    router.push(`/movies/${result.id}`)
+                            }}>
                                 <div>
                                     <div>
                                         {
                                             result.primaryImage !== null ? (<>
-                                                <Image className='rounded-md w-[300px] h-[300px]' width={150} height={200} src={result.primaryImage.url} alt={'image'}/>
+                                                <Image className='rounded-md w-[300px] h-[300px] lg:w-[200px] lg:h-[300px]' width={150} height={200} src={result.primaryImage.url} alt={'image'}/>
                                             </>) : (<div className='bg-slate-300 h-[300px] w-full grid place-items-center'>
                                                 <p className='font-medium'>Default</p>
                                             </div>)
@@ -85,6 +86,42 @@ const Index = (props: Props) => {
                 }
                 ...
                 </Swiper>
+
+                </div>
+                {/* desktop */}
+                <div className='hidden lg:flex'>
+                <Swiper
+                spaceBetween={20}
+                slidesPerView={4}
+                >
+                    {
+                    data !== undefined &&
+                    (data.results.map((result: any, index: number) => {
+                        return (
+                            <SwiperSlide key={index} onClick={() => {
+                                    router.push(`/movies/${result.id}`)
+                            }}>
+                                <div>
+                                    <div>
+                                        {
+                                            result.primaryImage !== null ? (<>
+                                                <Image className='rounded-md w-[300px] h-[300px]' width={100} height={300} src={result.primaryImage.url} alt={'image'}/>
+                                            </>) : (<div className='bg-slate-300 h-[300px] w-full grid place-items-center'>
+                                                <p className='font-medium'>Default</p>
+                                            </div>)
+                                        }
+                                    </div>
+                                    <p className='font-semibold text-center'>{result.titleText.text}</p>
+                                </div>
+                                
+                            </SwiperSlide>
+                        )
+                    }))
+                }
+                ...
+                </Swiper>
+
+                </div>
             </main>
         </Fragment>
     )
