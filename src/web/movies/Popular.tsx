@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 export const getter = (url: string) => axios.get(url, {
     
     headers: {
-        'X-RapidAPI-Key': '9e89d4ea21msh48f2cd0ac7d903ep132579jsna3c3bc99b2a5',
+        'X-RapidAPI-Key':  process.env.NEXT_PUBLIC_X_RapidAPI_Key,
         'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
     }
 }

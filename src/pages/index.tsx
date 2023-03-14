@@ -14,6 +14,7 @@ import Carousel from '@/Layout/Carousel'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  console.log('apikey',process.env.NEXT_PUBLIC_X_RapidAPI_Key)
   return (
     <>
       <Head>
